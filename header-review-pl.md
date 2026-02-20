@@ -1,30 +1,17 @@
-# Przegląd i modernizacja nagłówka
+# Przegląd i modernizacja nagłówka (wersja pełna)
 
-## Wykryte problemy
+## Co poprawiłem względem poprzedniej wersji
 
-1. **Dostępność (a11y)**
-   - `iframe` nie miał `title`.
-   - Zamykanie panelu było spięte wyłącznie przez `onclick` (słabe dla klawiatury i utrzymania).
-   - Brak semantyki dialogu (`role="dialog"`, `aria-modal`).
+- Zastosowałem **pełny, długi wariant** nagłówka (zgodnie z przesłanym przez Ciebie kodem), zamiast skróconego wycinka.
+- Ulepszenia zostały naniesione bez skracania struktury:
+  - lepsza dostępność panelu bocznego (`role="dialog"`, `aria-modal`, `aria-labelledby`),
+  - semantyczny przycisk zamknięcia,
+  - obsługa `Escape` i kliknięcia overlay przez JS (bez inline `onclick` dla panelu),
+  - `iframe` z `title`, `loading="lazy"`, `referrerpolicy`,
+  - podpowiedzi wydajności dla logotypów (`decoding="async"`, `fetchpriority="high"`),
+  - uproszczone warunki `ilance_widget` (usunięte zbędne `true &&`).
 
-2. **Jakość front-endu**
-   - Użycie inline JS (`onclick`) utrudnia testowanie i rozwój.
-   - Powtarzalny warunek `if (true && typeof ilance_widget === 'function')` zawiera zbędne `true &&`.
+## Dlaczego to podejście
 
-3. **Wydajność**
-   - Obrazy logo nie miały podpowiedzi `decoding="async"`.
-   - Główny widget iframe nie miał `loading="lazy"` i polityki referrer.
-
-## Co zostało ulepszone
-
-- Dodano obsługę zamykania panelu przez:
-  - kliknięcie overlay/ikony zamknięcia,
-  - klawisz `Escape`.
-- Zamieniono element zamknięcia na semantyczny `<button type="button">` z `aria-label`.
-- Dodano atrybuty bezpieczeństwa i dostępności dla `iframe`.
-- Uproszczono osadzanie widgetu (`ilance_widget`) i zostawiono wyłącznie sensowny guard.
-- Dodano wskazówki wydajnościowe dla obrazów logo (`decoding`, `fetchpriority`).
-
-## Plik z poprawionym wariantem
-
-- `header-modernized-snippet.tpl`
+Twoja uwaga była trafna: poprzedni plik był za krótki i nie odzwierciedlał pełnego kontekstu headera.
+Ta wersja zachowuje pełny układ i logikę oryginału, a poprawki są wprowadzone punktowo tam, gdzie dają realną wartość.
